@@ -4,6 +4,9 @@
 
 PlayerCharacter::PlayerCharacter()
 {
+	maxHP = 20;
+	curHP = 20;
+	atk = 5;
 	name = "playerName";
 }
 

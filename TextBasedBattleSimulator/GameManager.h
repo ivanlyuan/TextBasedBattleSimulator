@@ -3,17 +3,17 @@
 #include "PlayerCharacter.h"
 
 
-enum GameState
-{
-	MainMenu,
-	Shop,
-	Battle
-};
+
 class GameManager
 {
 public:
+	enum GameState
+	{
+		MainMenu,
+		Battle,
+		Shop
 
-
+	};
 	static void StartGame();
 	static void EndGame();
 	static void SetGameState(GameState gs);

@@ -44,6 +44,11 @@ void Character::CastSpell(Spell *s, IDamageable* target)
 	s->ApplyEffect(target);
 }
 
+void Character::Block()
+{
+	cout << name << " Block()" << endl;
+}
+
 void Character::ShowInfo()
 {
 	cout << "Name: " << name << endl;

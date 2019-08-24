@@ -120,6 +120,7 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="IDamageable.cpp" />
     <ClCompile Include="MenuManager.cpp" />
+    <ClCompile Include="MenuOption.cpp" />
     <ClCompile Include="Shop.cpp" />
     <ClCompile Include="Spell.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="EnemyCharacter.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="MenuManager.h" />
+    <ClInclude Include="MenuOption.h" />
     <ClInclude Include="Shop.h" />
     <ClInclude Include="Spell.h" />
     <ClInclude Include="Character.h" />

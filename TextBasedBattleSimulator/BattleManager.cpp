@@ -1,5 +1,6 @@
 #include "BattleManager.h"
 #include "GameManager.h" 
+#include "MenuManager.h"
 #include <algorithm>
 
 bool BattleManager::isPlayerTurn = true;
@@ -17,12 +18,16 @@ BattleManager::~BattleManager()
 
 void BattleManager::StartWave(int level, PlayerCharacter* _player)
 {
+	//set up characters
 	EnemyCharacter* enemy1 = new EnemyCharacter("enemy1");
 	EnemyCharacter* enemy2 = new EnemyCharacter("enemy2");
 	enemies.push_back(enemy1);
 	enemies.push_back(enemy2);
 	player = _player;
-
+	
+	//start battle
+	GameManager::SetGameState(GameManager::Battle);
+	MenuManager::BattleActionMenu();
 
 }
 
@@ -31,27 +36,37 @@ void BattleManager::TryEndWave()
 	if (enemies.size() == 0)
 	{
 		cout << "==========Wave ended==========" << endl;
-		GameManager::SetGameState(Shop);
+		GameManager::SetGameState(GameManager::Shop);
+		MenuManager::ShopMenu();
 	}
 }
 
-void BattleManager::EnemiesTurn()
+void BattleManager::StartTurn(bool isPlayer)
 {
-	if (GameManager::GetGameState() != Battle)
+	if (GameManager::GetGameState() != GameManager::Battle)
 	{
 		return;
 	}
+	cout << endl;
+	cout << "==========" << (isPlayerTurn ? "Player's" : "Enemies'") << " turn" << "==========" << endl;
 
-
-	for (int i = 0; i < enemies.size(); i++)
+	if (isPlayer)
 	{
-		//enemies pick random actions
-		//
-		//
-		enemies[i]->Attack(player);
+		MenuManager::BattleActionMenu();
+	}
+	else
+	{
+		for (unsigned int i = 0; i < enemies.size(); i++)
+		{
+			//enemies pick random actions
+			//
+			//
+			enemies[i]->Attack(player);
+		}
 	}
 
-	EndTurn(false);
+
+	EndTurn(isPlayer);
 }
 
 void BattleManager::RemoveEnemy(EnemyCharacter* enemy)
@@ -71,7 +86,7 @@ void BattleManager::RemoveEnemy(EnemyCharacter* enemy)
 
 void BattleManager::EndTurn(bool isPlayer)
 {
-	if (GameManager::GetGameState() != Battle)
+	if (GameManager::GetGameState() != GameManager::Battle)
 	{
 		return;
 	}
@@ -79,14 +94,8 @@ void BattleManager::EndTurn(bool isPlayer)
 
 	if (isPlayerTurn == isPlayer)
 	{
-		cout << "==========" << (isPlayerTurn ? "Player's" : "Enemies'") << " turn ended" << "==========" << endl;
 		isPlayerTurn = !isPlayerTurn;
-
-		if (!isPlayerTurn)
-		{
-			EnemiesTurn();
-		}
-
+		StartTurn(isPlayerTurn);
 	}
 	else
 	{

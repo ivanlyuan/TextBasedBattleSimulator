@@ -1,25 +1,27 @@
 #pragma once
 #include "Spell.h"
+#include "PlayerCharacter.h"
+#include <vector>
 
-struct ShopUpgrade
+using std::vector;
+
+class ShopUpgrade
 {
 public:
+	enum UpgradeType
+	{
+		pUpgrade, mpUpgrade, atkUpgrade, spellSlotUpgrade, spellUpgrade
+	};
+	ShopUpgrade(UpgradeType type);
 	int GetCost() { return cost; };
+	void Apply(PlayerCharacter* c);
+
 private:
-	int cost;
-};
-
-struct StatUpgrade
-{
-	unsigned int hp;
-	unsigned int mp;
-	unsigned int atk;
-	unsigned int spellSlot;
-};
-
-struct SpellUpgrade
-{
+	string name;
+	unsigned int amount;
 	Spell* spell;
+	void(*Effect)(PlayerCharacter* c);
+	unsigned int cost;
 };
 
 class Shop
@@ -29,6 +31,6 @@ public:
 	~Shop();
 	void ShuffleUpgrades();
 private:
-	ShopUpgrade * Upgrades;
+	vector<ShopUpgrade*> Upgrades;
 	
 };
