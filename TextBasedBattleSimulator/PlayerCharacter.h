@@ -4,6 +4,9 @@
 #include "Character.h"
 #include "Spell.h"
 #include "IHasName.h"
+#include "Shop.h"
+#include "ShopUpgrade.h"
+
 
 class PlayerCharacter :public Character
 {
@@ -13,10 +16,9 @@ public:
 	~PlayerCharacter();
 	void Attack(IDamageable* target)override;
 	void ObtainGold(int amount);
-	void IncreaseHP(int amount) { maxHP += amount; curHP += amount; };
-	void IncreaseMP(int amount) { maxMP += amount; curMP += amount; };
-	void IncreaseSpellSlots(int amount) { spellSlots += amount; };
-	void AddSpell(Spell* spell) { spells.push_back(spell); };
+	void ApplyUpgrade(ShopUpgrade* su);
+	void AddSpell(Spell* spell) { cout << "Added spell" << endl; spells.push_back(spell); };
 	void OnDeath() override;
 	int GetGold() { return gold; };
+	void PayGold(int amount) { cout << "Paid " << amount << " gold" << endl; gold -= amount; };
 };

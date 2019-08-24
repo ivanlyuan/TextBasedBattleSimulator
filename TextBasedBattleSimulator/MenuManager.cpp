@@ -1,5 +1,7 @@
 #include"MenuManager.h"
 #include "Shop.h"
+#include "ShopUpgrade.h"
+#include "IDamageable.h"
 #include <ios>
 
 using std::cin;
@@ -15,7 +17,9 @@ void MenuManager::BuyUpgrade(MenuOption * mo)
 	}
 	else
 	{
-		mo->upgrade->Apply(BattleManager::GetPlayer());
+		BattleManager::GetPlayer()->PayGold(mo->upgrade->GetCost());
+		mo->upgrade->ApplyEffect();
+		ShopMenu();
 	}
 }
 
@@ -119,23 +123,40 @@ void MenuManager::SpellTargetMenu(Spell* spell,IDamageable* target)
 	ShowMenu();
 }
 
+void SpellEffectTest(IDamageable* target)
+{
+	cout << "SpellEffectTest()" << endl;
+}
+
 void MenuManager::ShopMenu()
 {
-	cout << "===Shop===" << endl;//not finished
+	cout << "=====Shop=====" << endl;//not finished
 	
-	/*
+	
 	mos.clear();
 	MenuOption* mo;
-	ShopUpgrade* su = new ShopUpgrade();
+	ShopUpgrade* su;
+
+	su = new ShopUpgrade(StatType::hp, 5, 5);
 	mo = new MenuOption("+5 HP", su);
 	mos.push_back(mo);
-	mo = new MenuOption("+5 MP", );
+
+	su = new ShopUpgrade(StatType::mp, 5, 5);
+	mo = new MenuOption("+5 MP", su);
 	mos.push_back(mo);
-	mo = new MenuOption("+1 Spell Slot", );
+
+	su = new ShopUpgrade(StatType::spellSlot, 5, 5);
+	mo = new MenuOption("+1 Spell Slot", su);
 	mos.push_back(mo);
-	mo = new MenuOption("Learn Spells", );
+
+
+	Spell* spell = new Spell(SpellEffectTest, true, true, 5, "SpellTest");
+	su = new ShopUpgrade(spell, 5);
+	mo = new MenuOption("Spell: " + spell->GetName(), su);
 	mos.push_back(mo);
-	*/
+	
+	ShowMenu();
+
 	return;
 }
 

@@ -122,6 +122,7 @@
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="MenuOption.cpp" />
     <ClCompile Include="Shop.cpp" />
+    <ClCompile Include="ShopUpgrade.cpp" />
     <ClCompile Include="Spell.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="IHasName.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="MenuOption.h" />
     <ClInclude Include="Shop.h" />
+    <ClInclude Include="ShopUpgrade.h" />
     <ClInclude Include="Spell.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="IDamageable.h" />

@@ -1,10 +1,14 @@
 #include "Shop.h"
+#include "BattleManager.h"
 #include "PlayerCharacter.h"
 
-ShopUpgrade::ShopUpgrade(UpgradeType type)
+
+void Shop::ApplyStatUpgrade(ShopUpgrade * su)
 {
+	BattleManager::GetPlayer()->ApplyUpgrade(su);
 }
 
-void ShopUpgrade::Apply(PlayerCharacter * c)
+void Shop::AddSpell(ShopUpgrade * su)
 {
+	BattleManager::GetPlayer()->AddSpell(su->GetSpell());
 }

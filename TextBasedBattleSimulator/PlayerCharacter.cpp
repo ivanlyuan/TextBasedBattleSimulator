@@ -35,6 +35,32 @@ void PlayerCharacter::ObtainGold(int amount)
 	cout << name << " obtained " << amount << " gold!" << endl;
 }
 
+void PlayerCharacter::ApplyUpgrade(ShopUpgrade * su)
+{
+	cout << "Applied upgrade " << endl;
+
+	switch (su->GetStatType())
+	{
+	case StatType::atk:
+		Character::atk += su->GetAmount();
+		break;
+	case StatType::hp:
+		Character::maxHP += su->GetAmount();
+		Character::curHP += su->GetAmount();
+		break;
+	case StatType::mp:
+		Character::maxMP += su->GetAmount();
+		Character::curMP += su->GetAmount();
+		break;
+	case StatType::spellSlot:
+		Character::spellSlots += su->GetAmount();
+		break;
+	default:
+		cout << "Invalid stat type" << endl;
+		break;
+	}
+}
+
 void PlayerCharacter::OnDeath()
 {
 	IDamageable::OnDeath();
