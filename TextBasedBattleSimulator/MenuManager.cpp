@@ -31,7 +31,7 @@ void MenuManager::ShowMenu()
 	}
 
 	AskForMenuInput();
-
+	cout << "====================" << endl;
 }
 
 void MenuManager::StartGame(MenuOption * _mo)
@@ -42,6 +42,11 @@ void MenuManager::StartGame(MenuOption * _mo)
 void MenuManager::EndGame(MenuOption* _mo)
 {
 	GameManager::EndGame();
+}
+
+void MenuManager::StartWave(MenuOption * mo)
+{
+	BattleManager::StartWave(0, BattleManager::GetPlayer());
 }
 
 void MenuManager::MainMenu(MenuOption* _mo)//shortcut
@@ -76,6 +81,8 @@ void MenuManager::BattleActionMenu()
 	mo = new MenuOption("Spell", SpellSelectionMenu);
 	mos.push_back(mo);
 	mo = new MenuOption("Block", Block);
+	mos.push_back(mo);
+	mo = new MenuOption("Check Battlefield", CheckBattlefield);
 	mos.push_back(mo);
 
 	ShowMenu();
@@ -155,10 +162,36 @@ void MenuManager::ShopMenu()
 	mo = new MenuOption("Spell: " + spell->GetName(), su);
 	mos.push_back(mo);
 	
+	mo = new MenuOption("Leave shop", StartWave);
+	mos.push_back(mo);
+
+
+
 	ShowMenu();
 
 	return;
 }
+
+void MenuManager::CheckBattlefield(MenuOption * mo)
+{
+	PlayerCharacter* p = BattleManager::GetPlayer();
+	cout << p->GetName() << " HP: " << p->GetCurHP() << "/" << p->GetMaxHP() << endl;
+
+
+
+	for (size_t i = 0; i < BattleManager::GetEnemies().size(); i++)
+	{
+		EnemyCharacter* e = BattleManager::GetEnemies()[i];
+		if (e->IsIdentified())
+		{
+			cout << e->GetName() << " HP: " << e->GetCurHP() << "/" << e->GetMaxHP() << endl;
+		}
+	}
+
+	BattleActionMenu();
+}
+
+
 
 void MenuManager::Attack(MenuOption * mo)
 {
@@ -179,6 +212,7 @@ void MenuManager::AskForMenuInput()
 		if (i < mos.size())
 		{
 			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			cout << "====================" << endl;
 			mos[i]->Action(mos[i]);
 			return;
 		}

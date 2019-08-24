@@ -25,6 +25,9 @@ void BattleManager::StartWave(int level, PlayerCharacter* _player)
 	enemies.push_back(enemy2);
 	player = _player;
 	
+	//print enemy data
+	//
+
 	//start battle
 	GameManager::SetGameState(GameManager::Battle);
 	MenuManager::BattleActionMenu();

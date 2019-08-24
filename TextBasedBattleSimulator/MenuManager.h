@@ -14,6 +14,7 @@ public:
 	//start/end game
 	static void StartGame(MenuOption* _mo);
 	static void EndGame(MenuOption* _mo);
+	static void StartWave(MenuOption* mo);
 	//call menu
 	static void MainMenu(MenuOption* _mo);
 	static void MainMenu();
@@ -23,6 +24,7 @@ public:
 	static void SpellSelectionMenu(MenuOption* _mo);
 	static void SpellTargetMenu(Spell* spell, IDamageable* target);
 	static void ShopMenu();
+	static void CheckBattlefield(MenuOption* mo);
 	//battle actions
 	static void Attack(MenuOption* mo);
 	static void CastSpell(MenuOption* mo);
