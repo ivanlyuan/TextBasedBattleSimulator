@@ -25,6 +25,7 @@ public:
 	static void SpellTargetMenu(Spell* spell, IDamageable* target);
 	static void ShopMenu();
 	static void CheckBattlefield(MenuOption* mo);
+	static void CheckPlayerStats(MenuOption* mo);
 	//battle actions
 	static void Attack(MenuOption* mo);
 	static void CastSpell(MenuOption* mo);

@@ -31,7 +31,7 @@ void MenuManager::ShowMenu()
 	}
 
 	AskForMenuInput();
-	cout << "====================" << endl;
+	//cout << "====================" << endl;
 }
 
 void MenuManager::StartGame(MenuOption * _mo)
@@ -80,8 +80,10 @@ void MenuManager::BattleActionMenu()
 	mos.push_back(mo);
 	mo = new MenuOption("Spell", SpellSelectionMenu);
 	mos.push_back(mo);
+	/*not finished
 	mo = new MenuOption("Block", Block);
 	mos.push_back(mo);
+	*/
 	mo = new MenuOption("Check Battlefield", CheckBattlefield);
 	mos.push_back(mo);
 
@@ -137,7 +139,7 @@ void SpellEffectTest(IDamageable* target)
 
 void MenuManager::ShopMenu()
 {
-	cout << "=====Shop=====" << endl;//not finished
+	cout << "=====Shop=====" << endl;
 	
 	
 	mos.clear();
@@ -161,6 +163,10 @@ void MenuManager::ShopMenu()
 	su = new ShopUpgrade(spell, 5);
 	mo = new MenuOption("Spell: " + spell->GetName(), su);
 	mos.push_back(mo);
+
+	mo = new MenuOption("Check Stats", CheckPlayerStats);
+	mos.push_back(mo);
+
 	
 	mo = new MenuOption("Leave shop", StartWave);
 	mos.push_back(mo);
@@ -189,6 +195,18 @@ void MenuManager::CheckBattlefield(MenuOption * mo)
 	}
 
 	BattleActionMenu();
+}
+
+void MenuManager::CheckPlayerStats(MenuOption * mo)
+{
+	PlayerCharacter* p = BattleManager::GetPlayer();
+	cout << p->GetName() << endl;
+	cout << "HP: " << p->GetCurHP() << "/" << p->GetMaxHP() << endl;
+	cout << "MP: " << p->GetCurMP() << "/" << p->GetMaxMP() << endl;
+	cout << "Atk: " << p->GetAtk() << endl;
+	cout << "Spell slots: " << p->GetSpellSlots() << endl;
+
+	ShopMenu();
 }
 
 
