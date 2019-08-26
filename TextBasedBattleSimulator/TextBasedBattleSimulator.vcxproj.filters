@@ -54,6 +54,9 @@
     <ClCompile Include="ShopUpgrade.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
+    <ClCompile Include="SpellEffects.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -90,6 +93,9 @@
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="ShopUpgrade.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="SpellEffects.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>

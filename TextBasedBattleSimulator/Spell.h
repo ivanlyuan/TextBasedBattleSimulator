@@ -17,10 +17,12 @@ public:
 	void ApplyEffect(IDamageable* target);
 	bool GetCanTargetPlayer() { return canTargetPlayer; };
 	bool GetCanTargetEnemy() { return canTargetEnemy; };
+	IDamageable* GetTarget() { return target; };
 private:
 	bool canTargetPlayer;
 	bool canTargetEnemy;
 	int cost;
+	IDamageable* target;
 	void(*Effect)(IDamageable* target);
 };
 

@@ -13,6 +13,13 @@ MenuOption::MenuOption(string t, IDamageable * attackTarget)
 	Action = MenuManager::Attack;
 }
 
+MenuOption::MenuOption(string t, Spell * _spell)
+{
+	text = t;
+	spell = _spell;
+	Action = MenuManager::SpellTargetMenu;
+}
+
 MenuOption::MenuOption(string t, Spell * _spell, IDamageable * spellTarget)
 {
 	text = t;

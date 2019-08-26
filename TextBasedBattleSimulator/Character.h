@@ -20,6 +20,7 @@ public :
 	int GetCurMP() { return curMP; };
 	int GetAtk() { return atk; };
 	int GetSpellSlots() { return spellSlots; };
+	vector<Spell*> GetSpells() { return spells; };
 	void Block();
 	void ShowInfo();
 protected:

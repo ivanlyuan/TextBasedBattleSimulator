@@ -9,6 +9,7 @@ class MenuOption
 public:
 	MenuOption(string t, void(*action)(MenuOption* mo));//no parameter
 	MenuOption(string t, IDamageable *attackTarget);//attack
+	MenuOption(string t, Spell* _spell);//pick spell
 	MenuOption(string t, Spell* _spell, IDamageable *spellTarget);//cast spell
 	MenuOption(string t, ShopUpgrade* su);//buy upgrade
 
@@ -16,7 +17,7 @@ public:
 	IDamageable* target;
 	Spell* spell;
 	ShopUpgrade* upgrade;
-	void(*Action)(MenuOption*);
+	void(*Action)(MenuOption*) = {};
 private:
 
 

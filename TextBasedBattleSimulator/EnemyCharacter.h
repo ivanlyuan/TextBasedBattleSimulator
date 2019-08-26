@@ -8,7 +8,8 @@ public:
 	EnemyCharacter(string _name);
 	~EnemyCharacter();
 	void OnDeath() override;
-	bool IsIdentified() { return isIdentified; };
+	bool GetIsIdentified() { return isIdentified; };
+	void SetIsIdentified(bool b) { isIdentified = b; };
 private:
 	bool isIdentified;
 

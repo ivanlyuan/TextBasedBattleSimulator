@@ -22,7 +22,7 @@ public:
 	static void BattleActionMenu();
 	static void AttackTargetMenu(MenuOption* _mo);
 	static void SpellSelectionMenu(MenuOption* _mo);
-	static void SpellTargetMenu(Spell* spell, IDamageable* target);
+	static void SpellTargetMenu(MenuOption* mo);
 	static void ShopMenu();
 	static void CheckBattlefield(MenuOption* mo);
 	static void CheckPlayerStats(MenuOption* mo);

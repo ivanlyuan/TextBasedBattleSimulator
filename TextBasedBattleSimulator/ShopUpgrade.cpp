@@ -12,6 +12,7 @@ ShopUpgrade::ShopUpgrade(StatType type, int _amount, unsigned int _cost)
 ShopUpgrade::ShopUpgrade(Spell * _spell, unsigned int _cost)
 {
 	cost = _cost;
+	spell = _spell;
 	Effect = Shop::AddSpell;
 }
 

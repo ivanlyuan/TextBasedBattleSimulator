@@ -101,40 +101,63 @@ void MenuManager::AttackTargetMenu(MenuOption* _mo)
 		mo = new MenuOption(BattleManager::GetEnemies()[i]->GetName(), BattleManager::GetEnemies()[i]);
 		mos.push_back(mo);
 	}
+	mo = new MenuOption("Back", BattleActionMenu);
+	mos.push_back(mo);
 	ShowMenu();
 }
 
 void MenuManager::SpellSelectionMenu(MenuOption* _mo)
 {
-	cout << "SpellSelectionMenu()" << endl;
-	BattleActionMenu(_mo);
-	return;
-}
-
-void MenuManager::SpellTargetMenu(Spell* spell,IDamageable* target)
-{
 	mos.clear();
-	MenuOption* mo;
-	if (spell->GetCanTargetEnemy())
+
+	vector<Spell*> spells = BattleManager::GetPlayer()->GetSpells();
+	if (spells.size() == 0)
 	{
-		for (size_t i = 0; i < BattleManager::GetEnemies().size(); i++)
-		{
-			mo = new MenuOption(BattleManager::GetEnemies()[i]->GetName(), spell, BattleManager::GetEnemies()[i]);
-			mos.push_back(mo);
-		}
+		cout << "No spells available" << endl;
+		BattleActionMenu();
+		return;
 	}
 
-	if (spell->GetCanTargetPlayer())
+
+	MenuOption* mo;
+	for (size_t i = 0; i < spells.size(); i++)
 	{
-		IDamageable* p = BattleManager::GetPlayer();
-		mo = new MenuOption(p->GetName(), spell, p);
+		mo = new MenuOption(spells[i]->GetName(), spells[i]);
 		mos.push_back(mo);
 	}
+	mo = new MenuOption("Back", BattleActionMenu);
+	mos.push_back(mo);
 
 	ShowMenu();
 }
 
-void SpellEffectTest(IDamageable* target)
+void MenuManager::SpellTargetMenu(MenuOption* mo)
+{
+	mos.clear();
+	MenuOption* _mo;
+	if (mo->spell->GetCanTargetEnemy())
+	{
+		for (size_t i = 0; i < BattleManager::GetEnemies().size(); i++)
+		{
+			_mo = new MenuOption(BattleManager::GetEnemies()[i]->GetName(), mo->spell, BattleManager::GetEnemies()[i]);
+			mos.push_back(_mo);
+		}
+	}
+
+	if (mo->spell->GetCanTargetPlayer())
+	{
+		IDamageable* p = BattleManager::GetPlayer();
+		_mo = new MenuOption(p->GetName(), mo->spell, p);
+		mos.push_back(_mo);
+	}
+
+	mo = new MenuOption("Back", BattleActionMenu);
+	mos.push_back(mo);
+
+	ShowMenu();
+}
+
+void SpellTestEffect(IDamageable* target)
 {
 	cout << "SpellEffectTest()" << endl;
 }
@@ -161,7 +184,7 @@ void MenuManager::ShopMenu()
 	mos.push_back(mo);
 
 
-	Spell* spell = new Spell(SpellEffectTest, true, true, 5, "SpellTest");
+	Spell* spell = new Spell(SpellTestEffect, true, true, 5, "SpellTest");
 	su = new ShopUpgrade(spell, 5);
 	mo = new MenuOption("Spell: " + spell->GetName(), su);
 	mos.push_back(mo);
@@ -190,7 +213,7 @@ void MenuManager::CheckBattlefield(MenuOption * mo)
 	for (size_t i = 0; i < BattleManager::GetEnemies().size(); i++)
 	{
 		EnemyCharacter* e = BattleManager::GetEnemies()[i];
-		if (e->IsIdentified())
+		if (e->GetIsIdentified())
 		{
 			cout << e->GetName() << " HP: " << e->GetCurHP() << "/" << e->GetMaxHP() << endl;
 		}
@@ -207,6 +230,15 @@ void MenuManager::CheckPlayerStats(MenuOption * mo)
 	cout << "MP: " << p->GetCurMP() << "/" << p->GetMaxMP() << endl;
 	cout << "Atk: " << p->GetAtk() << endl;
 	cout << "Spell slots: " << p->GetSpellSlots() << endl;
+	cout << "Spells: " << endl;
+
+	for (size_t i = 0; i < p->GetSpells().size(); i++)
+	{
+		if (p->GetSpells()[i])
+		{
+			cout << p->GetSpells()[i]->GetName() << endl;
+		}
+	}
 
 	ShopMenu();
 }
