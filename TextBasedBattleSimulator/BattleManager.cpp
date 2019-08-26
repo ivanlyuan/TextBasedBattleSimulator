@@ -50,8 +50,10 @@ void BattleManager::StartTurn(bool isPlayer)
 	{
 		return;
 	}
+
 	cout << endl;
 	cout << "==========" << (isPlayerTurn ? "Player's" : "Enemies'") << " turn" << "==========" << endl;
+
 
 	if (isPlayer)
 	{

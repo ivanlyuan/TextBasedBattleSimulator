@@ -9,7 +9,7 @@ Character::Character()
 	name = "characterName";
 	maxHP = 10;
 	curHP = 10;
-	atk = 2;
+	atk = 3;
 }
 
 Character::~Character()
@@ -20,7 +20,7 @@ Character::~Character()
 
 void Character::Attack(IDamageable* target)
 {
-	if (target)
+	if (target != nullptr)
 	{
 		cout << name << " attacked " << target->GetName() << endl;
 		target->TakeDamage(atk);

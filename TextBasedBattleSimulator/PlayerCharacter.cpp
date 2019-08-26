@@ -64,6 +64,7 @@ void PlayerCharacter::ApplyUpgrade(ShopUpgrade * su)
 void PlayerCharacter::OnDeath()
 {
 	IDamageable::OnDeath();
+	delete this;
 	GameManager::EndGame();
 }
 

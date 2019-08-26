@@ -39,9 +39,9 @@ void MenuManager::StartGame(MenuOption * _mo)
 	GameManager::StartGame();
 }
 
-void MenuManager::EndGame(MenuOption* _mo)
+void MenuManager::ExitGame(MenuOption* _mo)
 {
-	GameManager::EndGame();
+	exit(0);
 }
 
 void MenuManager::StartWave(MenuOption * mo)
@@ -56,12 +56,14 @@ void MenuManager::MainMenu(MenuOption* _mo)//shortcut
 
 void MenuManager::MainMenu()
 {
+	GameManager::SetGameState(GameManager::GameState::MainMenu);
+
 	mos.clear();
 
 	MenuOption* mo;
 	mo = new MenuOption("Start Game", StartGame);
 	mos.push_back(mo);
-	mo = new MenuOption("Exit", EndGame);
+	mo = new MenuOption("Exit", ExitGame);
 	mos.push_back(mo);
 
 	ShowMenu();

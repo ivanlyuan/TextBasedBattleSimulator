@@ -13,7 +13,7 @@ class MenuManager
 public:
 	//start/end game
 	static void StartGame(MenuOption* _mo);
-	static void EndGame(MenuOption* _mo);
+	static void ExitGame(MenuOption* _mo);
 	static void StartWave(MenuOption* mo);
 	//call menu
 	static void MainMenu(MenuOption* _mo);

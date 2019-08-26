@@ -25,6 +25,7 @@ void GameManager::StartGame()
 void GameManager::EndGame()
 {
 	cout << "GameManager.EndGame()" << endl;
+	MenuManager::MainMenu();
 }
 
 void GameManager::SetGameState(GameState gs)
