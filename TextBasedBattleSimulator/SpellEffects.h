@@ -3,10 +3,9 @@
 
 namespace SpellEffects
 {
-	static void Fireball(IDamageable* target);
-	static void Heal(IDamageable* target);
-	static void Whirlwind(vector<IDamageable*> targets);
-	static void Drain(IDamageable* target, IDamageable* self);
-	static void QuickHeal(IDamageable* target);
-	static void Identify(EnemyCharacter* e);
+	void Fireball(IDamageable* target);
+	void Heal(IDamageable* target);
+	void Whirlwind(IDamageable* target);
+	void Drain(IDamageable* target, IDamageable* self);
+	void Identify(EnemyCharacter* e);
 }

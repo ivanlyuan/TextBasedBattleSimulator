@@ -26,7 +26,7 @@ EnemyCharacter::EnemyCharacter(EnemyType et)
 		curHP = 15;
 		maxMP = 0;
 		curMP = 0;
-		atk = 4;
+		atk = 3;
 		gold = 10;
 		break;
 	case EnemyCharacter::mage:
@@ -40,7 +40,7 @@ EnemyCharacter::EnemyCharacter(EnemyType et)
 		break;
 	case EnemyCharacter::eliteSolider:
 		name = "Elite Solider";
-		maxHP = 24;
+		maxHP = 30;
 		curHP = 24;
 		maxMP = 0;
 		curMP = 0;
@@ -62,7 +62,7 @@ EnemyCharacter::EnemyCharacter(EnemyType et)
 		curHP = 120;
 		maxMP = 0;
 		curMP = 0;
-		atk = 8;
+		atk = 10;
 		gold = 120;
 		break;
 	default:

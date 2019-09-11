@@ -35,6 +35,12 @@ void BattleManager::TryEndWave()
 {
 	if (enemies.size() == 0)
 	{
+		if (GameManager::GetCurLevel() == LevelManager::GetEnemies().size()-1)//is last level
+		{
+			GameManager::EndGame();
+			return;
+		}
+
 		cout << "==========Wave ended==========" << endl;
 		GameManager::SetGameState(GameManager::Shop);
 		MenuManager::ShopMenu();

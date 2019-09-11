@@ -1,11 +1,13 @@
 #pragma once
 #include<iostream>
 #include<string>
+#include<vector>
 #include"IDamageable.h"
 
 using std::cout;
 using std::endl;
 using std::string;
+using std::vector;
 
 class Spell :public IHasName
 {

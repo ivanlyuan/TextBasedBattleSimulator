@@ -1,7 +1,10 @@
 #include "Shop.h"
 #include "BattleManager.h"
 #include "PlayerCharacter.h"
+#include "SpellEffects.h"
 #include <algorithm>
+#include <random>
+#include <ctime>
 
 vector<ShopUpgrade*> Shop::CurUpgrades;
 vector<ShopUpgrade*> Shop::AllUpgradesPool;
@@ -18,6 +21,14 @@ void Shop::InitUpgrades()
 
 	su = new ShopUpgrade("Spell slots+1", StatType::spellSlot, 5, 5);
 	AllUpgradesPool.push_back(su);
+
+	Spell* fireball = new Spell(SpellEffects::Fireball, false, true, 3, "Fireball");
+	su = new ShopUpgrade("Spell: Fireball", fireball, 5);
+	AllUpgradesPool.push_back(su);
+
+	Spell* whirlwind = new Spell(SpellEffects::Whirlwind, false, true, 5, "Whirlwind");
+	su = new ShopUpgrade("Spell: Whirlwind", whirlwind, 5);
+	AllUpgradesPool.push_back(su);
 }
 
 void Shop::ShuffleUpgrades(int amount)
@@ -29,10 +40,10 @@ void Shop::ShuffleUpgrades(int amount)
 		return;
 	}
 
-
+	srand(time(0));
+	std::random_shuffle(AllUpgradesPool.begin(), AllUpgradesPool.end());
 	for (int i = 0; i < amount; i++)
 	{
-		//std::random_shuffle(AllUpgradesPool.begin(), AllUpgradesPool.end());
 		CurUpgrades.push_back(AllUpgradesPool[i]);
 	}
 }

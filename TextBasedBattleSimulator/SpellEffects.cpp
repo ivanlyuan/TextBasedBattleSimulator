@@ -2,7 +2,10 @@
 
 void SpellEffects::Fireball(IDamageable* target)
 {
-
+	if (target)
+	{
+		target->TakeDamage(8);
+	}
 }
 
 void SpellEffects::Heal(IDamageable* target)
@@ -13,12 +16,9 @@ void SpellEffects::Heal(IDamageable* target)
 	}
 }
 
-void SpellEffects::Whirlwind(vector<IDamageable*> targets)
+void SpellEffects::Whirlwind(IDamageable* target)
 {
-	for (size_t i = 0; i < targets.size(); i++)
-	{
-		targets[i]->TakeDamage(5);
-	}
+
 }
 
 void SpellEffects::Drain(IDamageable* target,IDamageable* self)
@@ -31,14 +31,6 @@ void SpellEffects::Drain(IDamageable* target,IDamageable* self)
 	if (self)
 	{
 		self->Heal(5);
-	}
-}
-
-void SpellEffects::QuickHeal(IDamageable* target)
-{
-	if (target)
-	{
-		target->TakeDamage(5);
 	}
 }
 
