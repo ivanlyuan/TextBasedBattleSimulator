@@ -23,6 +23,7 @@ public :
 	vector<Spell*> GetSpells() { return spells; };
 	void Block();
 	void ShowInfo();
+	void FullRestore() { curHP = maxHP; curMP = maxMP; };
 protected:
 	int maxMP;
 	int curMP;

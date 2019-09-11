@@ -44,9 +44,10 @@ void MenuManager::ExitGame(MenuOption* _mo)
 	exit(0);
 }
 
-void MenuManager::StartWave(MenuOption * mo)
+void MenuManager::StartNextLevel(MenuOption * mo)
 {
-	BattleManager::StartWave(0, BattleManager::GetPlayer());
+	GameManager::NextLevel();
+	BattleManager::StartWave(BattleManager::GetPlayer());
 }
 
 void MenuManager::MainMenu(MenuOption* _mo)//shortcut
@@ -171,29 +172,17 @@ void MenuManager::ShopMenu()
 	MenuOption* mo;
 	ShopUpgrade* su;
 
-	su = new ShopUpgrade(StatType::hp, 5, 5);
-	mo = new MenuOption("+5 HP", su);
-	mos.push_back(mo);
-
-	su = new ShopUpgrade(StatType::mp, 5, 5);
-	mo = new MenuOption("+5 MP", su);
-	mos.push_back(mo);
-
-	su = new ShopUpgrade(StatType::spellSlot, 5, 5);
-	mo = new MenuOption("+1 Spell Slot", su);
-	mos.push_back(mo);
-
-
-	Spell* spell = new Spell(SpellTestEffect, true, true, 5, "SpellTest");
-	su = new ShopUpgrade(spell, 5);
-	mo = new MenuOption("Spell: " + spell->GetName(), su);
-	mos.push_back(mo);
-
+	for (size_t i = 0; i < Shop::GetCurUpgrades().size(); i++)
+	{
+		su = Shop::GetCurUpgrades()[i];
+		mo = new MenuOption(Shop::GetCurUpgrades()[i]->GetName(), su);
+		mos.push_back(mo);
+	}
 	mo = new MenuOption("Check Stats", CheckPlayerStats);
 	mos.push_back(mo);
 
 	
-	mo = new MenuOption("Leave shop", StartWave);
+	mo = new MenuOption("Leave shop", StartNextLevel);
 	mos.push_back(mo);
 
 
@@ -229,6 +218,7 @@ void MenuManager::CheckPlayerStats(MenuOption * mo)
 	cout << "HP: " << p->GetCurHP() << "/" << p->GetMaxHP() << endl;
 	cout << "MP: " << p->GetCurMP() << "/" << p->GetMaxMP() << endl;
 	cout << "Atk: " << p->GetAtk() << endl;
+	cout << "Gold: " << p->GetGold() << endl;
 	cout << "Spell slots: " << p->GetSpellSlots() << endl;
 	cout << "Spells: " << endl;
 

@@ -119,6 +119,7 @@
     <ClCompile Include="EnemyCharacter.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="IDamageable.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="MenuOption.cpp" />
     <ClCompile Include="Shop.cpp" />
@@ -134,6 +135,7 @@
     <ClInclude Include="BattleManager.h" />
     <ClInclude Include="EnemyCharacter.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="LevelManager.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="MenuOption.h" />
     <ClInclude Include="Shop.h" />
@@ -144,6 +146,9 @@
     <ClInclude Include="IHasName.h" />
     <ClInclude Include="PlayerCharacter.h" />
     <ClInclude Include="SpellEffects.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="levels.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

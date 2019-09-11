@@ -9,13 +9,14 @@ class BattleManager
 {
 public:
 
-	static void StartWave(int level, PlayerCharacter* _player);
+	static void StartWave(PlayerCharacter* _player);
 	static void TryEndWave();
 	static void StartTurn(bool isPlayer);
 	static vector<EnemyCharacter*> GetEnemies() { return enemies; };
 	static PlayerCharacter* GetPlayer() { return player; };
 	static void RemoveEnemy(EnemyCharacter* enemy);
 	static void EndTurn(bool isPlayer);
+	static void SetUpLevel(vector<EnemyCharacter*> _enemies);
 private:
 	BattleManager();
 	~BattleManager();

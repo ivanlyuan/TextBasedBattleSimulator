@@ -1,19 +1,21 @@
 #include "Shop.h"
 
 
-ShopUpgrade::ShopUpgrade(StatType type, int _amount, unsigned int _cost)
+ShopUpgrade::ShopUpgrade(string _name,StatType type, int _amount, unsigned int _cost)
 {
+	name = _name;
 	cost = _cost;
 	amount = _amount;
 	Effect = Shop::ApplyStatUpgrade;
 
 }
 
-ShopUpgrade::ShopUpgrade(Spell * _spell, unsigned int _cost)
+ShopUpgrade::ShopUpgrade(string _name,Spell * _spell, unsigned int _cost)
 {
+	name = _name;
 	cost = _cost;
 	spell = _spell;
-	Effect = Shop::AddSpell;
+	Effect = Shop::AddSpellForPlayer;
 }
 
 

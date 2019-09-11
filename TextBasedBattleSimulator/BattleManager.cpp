@@ -1,36 +1,33 @@
 #include "BattleManager.h"
 #include "GameManager.h" 
 #include "MenuManager.h"
+#include "LevelManager.h"
 #include <algorithm>
 
 bool BattleManager::isPlayerTurn = true;
 vector<EnemyCharacter*> BattleManager::enemies;
 PlayerCharacter* BattleManager::player;
 
-BattleManager::BattleManager()
+void BattleManager::StartWave(PlayerCharacter* _player)
 {
-	
-}
+	//check curLevel and set up accordingly
+	LevelManager::SetUpLevel(GameManager::GetCurLevel());
 
-BattleManager::~BattleManager()
-{
-}
-
-void BattleManager::StartWave(int level, PlayerCharacter* _player)
-{
 	//set up characters
-	EnemyCharacter* enemy1 = new EnemyCharacter("enemy1");
-	EnemyCharacter* enemy2 = new EnemyCharacter("enemy2");
-	enemies.push_back(enemy1);
-	enemies.push_back(enemy2);
+
 	player = _player;
 	
 	//print enemy data
-	//
+	cout << "Enemies: " << endl;
+	for (size_t i = 0; i < enemies.size(); i++)
+	{
+		cout << enemies[i]->GetName() << endl;
+	}
 
 	//start battle
 	GameManager::SetGameState(GameManager::Battle);
 	MenuManager::BattleActionMenu();
+	TryEndWave();
 
 }
 
@@ -106,5 +103,10 @@ void BattleManager::EndTurn(bool isPlayer)
 	{
 		cout << "Error : It's not" << (isPlayerTurn ? "Player's" : "Enemies'") << " turn to end" << endl;
 	}
+}
+
+void BattleManager::SetUpLevel(vector<EnemyCharacter*> _enemies)
+{
+	enemies = _enemies;
 }
 

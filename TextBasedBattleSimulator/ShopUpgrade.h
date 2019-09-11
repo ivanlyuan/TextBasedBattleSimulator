@@ -3,12 +3,12 @@
 
 enum StatType;
 
-class ShopUpgrade
+class ShopUpgrade :public IHasName
 {
 public:
 
-	ShopUpgrade(StatType type, int _amount, unsigned int _cost);
-	ShopUpgrade(Spell* _spell, unsigned int _cost);
+	ShopUpgrade(string _name,StatType type, int _amount, unsigned int _cost);
+	ShopUpgrade(string _name,Spell* _spell, unsigned int _cost);
 	unsigned int GetCost() { return cost; };
 	Spell* GetSpell() { return spell; };
 	StatType GetStatType() { return statType; };
@@ -16,7 +16,6 @@ public:
 	void ApplyEffect();
 
 private:
-	string name;
 	StatType statType;
 	unsigned int amount;
 	Spell* spell;

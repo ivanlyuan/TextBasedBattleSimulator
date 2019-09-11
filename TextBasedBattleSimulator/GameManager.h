@@ -18,11 +18,13 @@ public:
 	static void EndGame();
 	static void SetGameState(GameState gs);
 	static GameState GetGameState() { return gameState; };
+	static unsigned int GetCurLevel() { return curLevel; };
+	static void NextLevel();
 private:
 	GameManager();
-	~GameManager();
 	static GameState gameState;
 	static PlayerCharacter player;
+	static unsigned int curLevel;
 	
 
 };

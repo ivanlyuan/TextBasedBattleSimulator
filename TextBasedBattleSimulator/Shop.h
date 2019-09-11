@@ -17,11 +17,15 @@ enum StatType
 class Shop
 {
 public:
-	static void ShuffleUpgrades();
+	static void InitUpgrades();
+	static void ShuffleUpgrades(int amount);
 	static void ApplyStatUpgrade(ShopUpgrade* su);
-	static void AddSpell(ShopUpgrade* su);
+	static void AddSpellForPlayer(ShopUpgrade* su);
+	static void AddUpgradeToPool(ShopUpgrade* su);
+	static vector<ShopUpgrade*> GetCurUpgrades() { return CurUpgrades; };
 private:
 	Shop();
-	vector<ShopUpgrade*> Upgrades;
+	static vector<ShopUpgrade*> CurUpgrades;//changes per level
+	static vector<ShopUpgrade*> AllUpgradesPool;//adds new spells per level
 	
 };

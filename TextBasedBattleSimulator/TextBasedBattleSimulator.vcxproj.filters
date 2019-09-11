@@ -57,6 +57,9 @@
     <ClCompile Include="SpellEffects.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -98,5 +101,13 @@
     <ClInclude Include="SpellEffects.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="LevelManager.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="levels.txt">
+      <Filter>資源檔</Filter>
+    </Text>
   </ItemGroup>
 </Project>

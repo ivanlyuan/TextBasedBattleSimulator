@@ -14,7 +14,7 @@ public:
 	//start/end game
 	static void StartGame(MenuOption* _mo);
 	static void ExitGame(MenuOption* _mo);
-	static void StartWave(MenuOption* mo);
+	static void StartNextLevel(MenuOption* mo);
 	//call menu
 	static void MainMenu(MenuOption* _mo);
 	static void MainMenu();
