@@ -10,9 +10,9 @@ ShopUpgrade::ShopUpgrade(string _name,StatType type, int _amount, unsigned int _
 
 }
 
-ShopUpgrade::ShopUpgrade(string _name,Spell * _spell, unsigned int _cost)
+ShopUpgrade::ShopUpgrade(Spell * _spell, unsigned int _cost)
 {
-	name = _name;
+	name = "Spell: " + _spell->GetName();
 	cost = _cost;
 	spell = _spell;
 	Effect = Shop::AddSpellForPlayer;

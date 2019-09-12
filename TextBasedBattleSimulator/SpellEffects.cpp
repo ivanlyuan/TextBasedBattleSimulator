@@ -1,43 +1,18 @@
 #include "SpellEffects.h"
 
-void SpellEffects::Fireball(IDamageable* target)
+void SpellEffects::DealDamage(IDamageable* target, int amount)
 {
 	if (target)
 	{
-		target->TakeDamage(8);
+		target->TakeDamage(amount);
 	}
 }
 
-void SpellEffects::Heal(IDamageable* target)
+void SpellEffects::Heal(IDamageable* target, int amount)
 {
 	if (target)
 	{
-		target->Heal(10);
+		target->Heal(amount);
 	}
 }
 
-void SpellEffects::Whirlwind(IDamageable* target)
-{
-
-}
-
-void SpellEffects::Drain(IDamageable* target,IDamageable* self)
-{
-	if (target)
-	{
-		target->TakeDamage(5);
-	}
-
-	if (self)
-	{
-		self->Heal(5);
-	}
-}
-
-void SpellEffects::Identify(EnemyCharacter* e)
-{
-	if (e)
-	{
-		e->SetIsIdentified(true);
-	}
-}

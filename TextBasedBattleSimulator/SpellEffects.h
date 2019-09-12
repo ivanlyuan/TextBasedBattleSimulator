@@ -3,9 +3,6 @@
 
 namespace SpellEffects
 {
-	void Fireball(IDamageable* target);
-	void Heal(IDamageable* target);
-	void Whirlwind(IDamageable* target);
-	void Drain(IDamageable* target, IDamageable* self);
-	void Identify(EnemyCharacter* e);
+	void DealDamage(IDamageable* target, int amount);
+	void Heal(IDamageable* target,int amount);
 }

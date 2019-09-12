@@ -22,12 +22,8 @@ void Shop::InitUpgrades()
 	su = new ShopUpgrade("Spell slots+1", StatType::spellSlot, 5, 5);
 	AllUpgradesPool.push_back(su);
 
-	Spell* fireball = new Spell(SpellEffects::Fireball, false, true, 3, "Fireball");
-	su = new ShopUpgrade("Spell: Fireball", fireball, 5);
-	AllUpgradesPool.push_back(su);
-
-	Spell* whirlwind = new Spell(SpellEffects::Whirlwind, false, true, 5, "Whirlwind");
-	su = new ShopUpgrade("Spell: Whirlwind", whirlwind, 5);
+	Spell* fireball = new Spell(SpellEffects::DealDamage, 8, false, true, 3, "Fireball");
+	su = new ShopUpgrade(fireball, 5);
 	AllUpgradesPool.push_back(su);
 }
 
@@ -55,7 +51,26 @@ void Shop::ApplyStatUpgrade(ShopUpgrade * su)
 
 void Shop::AddSpellForPlayer(ShopUpgrade * su)
 {
-	BattleManager::GetPlayer()->AddSpell(su->GetSpell());
+	BattleManager::GetPlayer()->AddSpell(su->GetSpell());//give player spell
+
+	for (size_t i = 0; i < AllUpgradesPool.size(); i++)//remove spell from pool
+	{
+		if (AllUpgradesPool[i] == su)
+		{
+			AllUpgradesPool.erase(AllUpgradesPool.begin() + i);
+			break;
+		}
+	}
+
+	for (size_t i = 0; i < CurUpgrades.size(); i++)//remove spell from shop
+	{
+		if (CurUpgrades[i] == su)
+		{
+			CurUpgrades.erase(CurUpgrades.begin() + i);
+			break;
+		}
+	}
+
 }
 
 void Shop::AddUpgradeToPool(ShopUpgrade * su)
