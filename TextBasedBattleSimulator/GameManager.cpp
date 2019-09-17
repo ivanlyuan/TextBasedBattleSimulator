@@ -5,6 +5,7 @@
 
 
 GameManager::GameState GameManager::gameState;
+PlayerCharacter* GameManager::player;
 unsigned int GameManager::curLevel;
 
 
@@ -26,7 +27,7 @@ void GameManager::StartGame()
 	{
 		return;
 	}
-	PlayerCharacter* p = new PlayerCharacter();
+	player = new PlayerCharacter();
 	Shop::InitUpgrades();
 	SetGameState(GameState::Battle);
 
@@ -34,7 +35,7 @@ void GameManager::StartGame()
 	{
 		if (gameState == GameState::Battle)
 		{
-			BattleManager::StartBattle(p);
+			BattleManager::StartBattle(player);
 		}
 		
 		if (gameState == GameState::Shop)
@@ -44,12 +45,10 @@ void GameManager::StartGame()
 
 	}
 
-}
+	cout << "==========Game Over==========" << endl;
+	delete player;
+	player = NULL;
 
-void GameManager::EndGame()
-{
-	cout << "=====Game Over=====" << endl;
-	MenuManager::MainMenu();
 }
 
 void GameManager::SetGameState(GameState gs)

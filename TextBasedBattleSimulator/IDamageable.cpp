@@ -6,6 +6,12 @@ using std::endl;
 
 void IDamageable::TakeDamage(int amount)
 {
+	if (!isAlive)
+	{
+		cout << name << "is already dead!" << endl;
+		return;
+	}
+
 	curHP -= amount;
 	cout << name << " took " << amount << " damage!" << endl;
 
@@ -18,6 +24,12 @@ void IDamageable::TakeDamage(int amount)
 
 void IDamageable::Heal(int amount)
 {
+	if (!isAlive)
+	{
+		cout << name << "is already dead!" << endl;
+		return;
+	}
+
 	int prevHP = curHP;
 	if (curHP + amount > maxHP)
 	{
@@ -33,5 +45,6 @@ void IDamageable::Heal(int amount)
 
 void IDamageable::OnDeath()
 {
+	isAlive = false;
 	cout << name << " died!" << endl;
 }

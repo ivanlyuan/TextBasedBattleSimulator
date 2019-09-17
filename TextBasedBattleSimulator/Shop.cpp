@@ -31,16 +31,20 @@ void Shop::InitUpgrades()
 	AllUpgradesPool.push_back(su);
 	
 
-	Spell* fireball = new Spell(SpellEffects::DealDamage, 10, false, true, false, 3, "Fireball");
+	Spell* fireball = new Spell(SpellEffects::DealDamage, 10, false, true, false, 7, "Fireball");
 	su = new ShopUpgrade(fireball, 5);
 	AllUpgradesPool.push_back(su);
 
-	Spell* quickHeal = new Spell(SpellEffects::Heal, 5, true, false, true, 5, "Quick-Heal");
+	Spell* gun = new Spell(SpellEffects::DealDamage, 2, false, true, true, 5, "Joker's neutral b");
+	su = new ShopUpgrade(gun, 5);
+	AllUpgradesPool.push_back(su);
+
+	Spell* quickHeal = new Spell(SpellEffects::Heal, 7, true, false, true, 10, "Quick-Heal");
 	su = new ShopUpgrade(quickHeal, 5);
 	AllUpgradesPool.push_back(su);
 
-	Spell* meteor = new Spell(SpellEffects::DealDamage, 20, false, true, false, 7, "Meteor");
-	su = new ShopUpgrade(meteor, 10);
+	Spell* meteor = new Spell(SpellEffects::DealDamage, 20, false, true, false, 20, "Meteor");
+	su = new ShopUpgrade(meteor, 5);
 	AllUpgradesPool.push_back(su);
 }
 

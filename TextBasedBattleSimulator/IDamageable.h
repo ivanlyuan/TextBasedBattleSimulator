@@ -8,8 +8,10 @@ public:
 	void Heal(int amount);
 	int GetMaxHP() { return maxHP; };
 	int GetCurHP() { return curHP; };
+	bool GetIsAlive() { return isAlive; };
 	virtual void OnDeath();
 protected:
 	int maxHP;
 	int curHP;
+	bool isAlive = true;
 };

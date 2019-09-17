@@ -4,21 +4,17 @@
 
 PlayerCharacter::PlayerCharacter()
 {
-	maxHP = 20;
-	curHP = 20;
-	maxMP = 10;
-	curMP = 10;
+	maxHP = 25;
+	curHP = 25;
+	maxMP = 25;
+	curMP = 25;
 	atk = 5;
 	name = "Player";
 }
 
 PlayerCharacter::PlayerCharacter(string _name)
 {
-	maxHP = 20;
-	curHP = 20;
-	maxMP = 10;
-	curMP = 10;
-	atk = 5;
+	PlayerCharacter();
 	name = _name;
 }
 
@@ -47,12 +43,12 @@ void PlayerCharacter::ApplyUpgrade(ShopUpgrade * su)
 	case StatType::hp:
 		Character::maxHP += amount;
 		Character::curHP += amount;
-		cout << "max HP increaced by " << amount << endl;
+		cout << "max HP increased by " << amount << endl;
 		break;
 	case StatType::mp:
 		Character::maxMP += amount;
 		Character::curMP += amount;
-		cout << "max MP increaced by " << amount << endl;
+		cout << "max MP increased by " << amount << endl;
 		break;
 	case StatType::spellSlot:
 		Character::spellSlots += amount;
@@ -60,7 +56,7 @@ void PlayerCharacter::ApplyUpgrade(ShopUpgrade * su)
 		break;
 	case StatType::atk:
 		Character::atk += amount;
-		cout << "atk increaced by " << amount << endl;
+		cout << "atk increased by " << amount << endl;
 		break;
 	default:
 		cout << "Invalid stat type" << endl;
@@ -71,7 +67,6 @@ void PlayerCharacter::ApplyUpgrade(ShopUpgrade * su)
 void PlayerCharacter::OnDeath()
 {
 	IDamageable::OnDeath();
-	delete this;
 	GameManager::SetGameState(GameManager::GameState::MainMenu);
 }
 

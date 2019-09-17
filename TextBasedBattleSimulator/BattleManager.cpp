@@ -19,13 +19,14 @@ void BattleManager::StartBattle(PlayerCharacter* _player)
 	
 	//print enemy data
 	cout << "==========Battle Start==========" << endl;
-	cout << "Enemies: ";
+	cout << "Enemies:" << endl;
 	for (size_t i = 0; i < enemies.size(); i++)
 	{
 		cout << enemies[i]->GetName() << endl;
 	}
 
 	//start battle
+	isPlayerTurn = true;
 	while (GameManager::GetGameState() == GameManager::Battle)
 	{
 		StartTurn(isPlayerTurn);
@@ -38,7 +39,8 @@ void BattleManager::TryEndBattle()
 	{
 		if (GameManager::GetCurLevel() == LevelManager::GetEnemies().size()-1)//is last level
 		{
-			GameManager::EndGame();
+			cout << "Congratulations!  You beat the game!" << endl;
+			GameManager::SetGameState(GameManager::MainMenu);
 			return;
 		}
 
@@ -69,6 +71,10 @@ void BattleManager::StartTurn(bool isPlayer)
 			//enemies pick random actions
 			//
 			//
+			if (!player->GetIsAlive())
+			{
+				break;
+			}
 			enemies[i]->Attack(player);
 		}
 	}
@@ -83,6 +89,7 @@ void BattleManager::RemoveEnemy(EnemyCharacter* enemy)
 	std::vector<EnemyCharacter*>::iterator position = std::find(enemies.begin(), enemies.end(), enemy);
 	if (position != enemies.end())
 	{
+		delete enemy;
 		enemies.erase(position);
 	}
 	else

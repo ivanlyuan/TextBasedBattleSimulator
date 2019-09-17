@@ -41,7 +41,7 @@ EnemyCharacter::EnemyCharacter(EnemyType et)
 	case EnemyCharacter::eliteSolider:
 		name = "Elite Solider";
 		maxHP = 30;
-		curHP = 24;
+		curHP = 30;
 		maxMP = 0;
 		curMP = 0;
 		atk = 6;
@@ -49,11 +49,11 @@ EnemyCharacter::EnemyCharacter(EnemyType et)
 		break;
 	case EnemyCharacter::archmage:
 		name = "Archmage";
-		maxHP = 20;
-		curHP = 20;
+		maxHP = 24;
+		curHP = 24;
 		maxMP = 0;
 		curMP = 0;
-		atk = 8;
+		atk = 12;
 		gold = 24;
 		break;
 	case EnemyCharacter::champion:
@@ -72,13 +72,14 @@ EnemyCharacter::EnemyCharacter(EnemyType et)
 
 EnemyCharacter::~EnemyCharacter()
 {
-	BattleManager::RemoveEnemy(this);
-	BattleManager::GetPlayer()->ObtainGold(gold);
+	
+
 }
 
 void EnemyCharacter::OnDeath()
 {
 	IDamageable::OnDeath();
-	delete this;//calls destructor
+	BattleManager::GetPlayer()->ObtainGold(gold);
+	BattleManager::RemoveEnemy(this);
 	BattleManager::TryEndBattle();
 }

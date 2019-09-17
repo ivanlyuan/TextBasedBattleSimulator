@@ -20,9 +20,9 @@ Character::~Character()
 
 void Character::Attack(IDamageable* target)
 {
-	if (target != nullptr)
+	if (target != NULL)
 	{
-		cout << name << " attacked " << target->GetName() << endl;
+		//cout << name << " attacked " << target->GetName() << endl;
 		target->TakeDamage(atk);
 	}
 	else
