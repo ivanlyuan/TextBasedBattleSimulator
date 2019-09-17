@@ -14,7 +14,7 @@ public:
 	//start/end game
 	static void StartGame(MenuOption* _mo);
 	static void ExitGame(MenuOption* _mo);
-	static void StartNextLevel(MenuOption* mo);
+	static void LeaveShop(MenuOption* mo);
 	//call menu
 	static void MainMenu(MenuOption* _mo);
 	static void MainMenu();
@@ -41,7 +41,7 @@ public:
 private:
 	MenuManager();
 	static void ShowMenu();
-	static void AskForMenuInput();
+	static int AskForMenuInput();
 	static vector<MenuOption*> mos;
 
 };

@@ -14,8 +14,8 @@ public :
 	Character();
 	~Character();
 	virtual void Attack(IDamageable* target);
-	void CastSpell(Spell* s);
-	void CastSpell(Spell* s, IDamageable* target);
+	bool CastSpell(Spell* s);
+	bool CastSpell(Spell* s, IDamageable* target);
 	int GetMaxMP() { return maxMP; };
 	int GetCurMP() { return curMP; };
 	int GetAtk() { return atk; };

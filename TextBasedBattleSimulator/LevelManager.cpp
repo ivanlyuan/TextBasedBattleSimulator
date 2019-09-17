@@ -33,7 +33,7 @@ bool LevelManager::Init()
 
 		for (int i = 0; i < s.size(); i++)
 		{
-			EnemyCharacter* e = new EnemyCharacter(EnemyCharacter::EnemyType(int(s[i] - '0')));
+			EnemyCharacter* e = new EnemyCharacter(EnemyCharacter::EnemyType(int(s[i] - '0')));// if out of range, calls Character()
 			LevelEnemies.push_back(e);
 		}
 		Enemies.push_back(LevelEnemies);

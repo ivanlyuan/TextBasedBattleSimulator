@@ -80,5 +80,5 @@ void EnemyCharacter::OnDeath()
 {
 	IDamageable::OnDeath();
 	delete this;//calls destructor
-	BattleManager::TryEndWave();
+	BattleManager::TryEndBattle();
 }

@@ -13,14 +13,14 @@ void MenuManager::BuyUpgrade(MenuOption * mo)
 	if (mo->upgrade->GetCost() > BattleManager::GetPlayer()->GetGold())
 	{
 		cout << "Not enough gold" << endl;
-		MenuManager::ShopMenu();
 	}
 	else
 	{
 		BattleManager::GetPlayer()->PayGold(mo->upgrade->GetCost());
 		mo->upgrade->ApplyEffect();
-		ShopMenu();
+
 	}
+	ShopMenu();
 }
 
 void MenuManager::ShowMenu()
@@ -30,8 +30,12 @@ void MenuManager::ShowMenu()
 		cout << i << ". " << mos[i]->text << endl;
 	}
 
-	AskForMenuInput();
-	//cout << "====================" << endl;
+	int i = -1;
+	while (i==-1)
+	{
+		i = AskForMenuInput();
+	}
+	mos[i]->Action(mos[i]);
 }
 
 void MenuManager::StartGame(MenuOption * _mo)
@@ -44,10 +48,10 @@ void MenuManager::ExitGame(MenuOption* _mo)
 	exit(0);
 }
 
-void MenuManager::StartNextLevel(MenuOption * mo)
+void MenuManager::LeaveShop(MenuOption * mo)
 {
 	GameManager::NextLevel();
-	BattleManager::StartWave(BattleManager::GetPlayer());
+	GameManager::SetGameState(GameManager::GameState::Battle);
 }
 
 void MenuManager::MainMenu(MenuOption* _mo)//shortcut
@@ -57,8 +61,6 @@ void MenuManager::MainMenu(MenuOption* _mo)//shortcut
 
 void MenuManager::MainMenu()
 {
-	GameManager::SetGameState(GameManager::GameState::MainMenu);
-
 	mos.clear();
 
 	MenuOption* mo;
@@ -158,14 +160,9 @@ void MenuManager::SpellTargetMenu(MenuOption* mo)
 	ShowMenu();
 }
 
-void SpellTestEffect(IDamageable* target)
-{
-	cout << "SpellEffectTest()" << endl;
-}
-
 void MenuManager::ShopMenu()
 {
-	cout << "=====Shop=====" << endl;
+	cout << "==========Shop==========" << endl;
 	
 	
 	mos.clear();
@@ -175,14 +172,14 @@ void MenuManager::ShopMenu()
 	for (size_t i = 0; i < Shop::GetCurUpgrades().size(); i++)
 	{
 		su = Shop::GetCurUpgrades()[i];
-		mo = new MenuOption(Shop::GetCurUpgrades()[i]->GetName(), su);
+		mo = new MenuOption(su->GetName() + "	" + std::to_string(su->GetCost()) + "g", su);
 		mos.push_back(mo);
 	}
 	mo = new MenuOption("Check Stats", CheckPlayerStats);
 	mos.push_back(mo);
 
 	
-	mo = new MenuOption("Leave shop", StartNextLevel);
+	mo = new MenuOption("Leave shop", LeaveShop);
 	mos.push_back(mo);
 
 
@@ -195,8 +192,7 @@ void MenuManager::ShopMenu()
 void MenuManager::CheckBattlefield(MenuOption * mo)
 {
 	PlayerCharacter* p = BattleManager::GetPlayer();
-	cout << p->GetName() << " HP: " << p->GetCurHP() << "/" << p->GetMaxHP() << endl;
-
+	cout << p->GetName() << " HP: " << p->GetCurHP() << "/" << p->GetMaxHP() << " MP: " << p->GetCurMP() << "/" << p->GetMaxMP() << endl;
 
 
 	for (size_t i = 0; i < BattleManager::GetEnemies().size(); i++)
@@ -242,10 +238,13 @@ void MenuManager::Attack(MenuOption * mo)
 
 void MenuManager::CastSpell(MenuOption * mo)
 {
-	BattleManager::GetPlayer()->CastSpell(mo->spell, mo->target);
+	if (!BattleManager::GetPlayer()->CastSpell(mo->spell, mo->target) || mo->spell->GetIsQuick())
+	{
+		BattleActionMenu();
+	}
 }
 
-void MenuManager::AskForMenuInput()
+int MenuManager::AskForMenuInput()
 {
 	//ask for input
 	unsigned int i;
@@ -254,14 +253,13 @@ void MenuManager::AskForMenuInput()
 		if (i < mos.size())
 		{
 			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			cout << "====================" << endl;
-			mos[i]->Action(mos[i]);
-			return;
+			cout << "================================================================================" << endl;
+			return i;
 		}
 	}
 
 	cout << "Invalid input, enter a number on the menu to select that option." << endl;
 	cin.clear();
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	AskForMenuInput();
+	return -1;
 }

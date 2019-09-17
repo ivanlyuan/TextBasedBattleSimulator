@@ -32,16 +32,32 @@ void Character::Attack(IDamageable* target)
 
 }
 
-void Character::CastSpell(Spell *s)
+bool Character::CastSpell(Spell *s)
 {
+	if (curMP < s->GetManaCost())
+	{
+		cout << "Not enough mp to cast " << s->GetName() << "!" << endl;
+		return false;
+	}
+
+	curMP -= s->GetManaCost();
 	cout << name << " casted " << s->GetName() << endl;
 	s->ApplyEffect();
+	return true;
 }
 
-void Character::CastSpell(Spell *s, IDamageable* target)
+bool Character::CastSpell(Spell *s, IDamageable* target)
 {
+	if (curMP < s->GetManaCost())
+	{
+		cout << "Not enough mp to cast " << s->GetName() << "!" << endl;
+		return false;
+	}
+
+	curMP -= s->GetManaCost();
 	cout << name << " casted " << s->GetName() << " on " << target->GetName() << endl;
 	s->ApplyEffect(target);
+	return true;
 }
 
 void Character::Block()

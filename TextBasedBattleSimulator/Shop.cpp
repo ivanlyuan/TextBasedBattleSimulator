@@ -11,19 +11,36 @@ vector<ShopUpgrade*> Shop::AllUpgradesPool;
 
 void Shop::InitUpgrades()
 {
+	AllUpgradesPool.clear();
+
+
 	ShopUpgrade* su;
 
-	su = new ShopUpgrade("HP+5", StatType::hp, 5, 5);
+	su = new ShopUpgrade("HP ", StatType::hp, 5, 5);
 	AllUpgradesPool.push_back(su);
 
-	su = new ShopUpgrade("MP+5", StatType::mp, 5, 5);
+	su = new ShopUpgrade("MP ", StatType::mp, 5, 5);
 	AllUpgradesPool.push_back(su);
 
-	su = new ShopUpgrade("Spell slots+1", StatType::spellSlot, 5, 5);
+	/*
+	su = new ShopUpgrade("Spell slots+1", StatType::spellSlot, 1, 5);
 	AllUpgradesPool.push_back(su);
+	*/
 
-	Spell* fireball = new Spell(SpellEffects::DealDamage, 8, false, true, 3, "Fireball");
+	su = new ShopUpgrade("atk", StatType::atk, 1, 5);
+	AllUpgradesPool.push_back(su);
+	
+
+	Spell* fireball = new Spell(SpellEffects::DealDamage, 10, false, true, false, 3, "Fireball");
 	su = new ShopUpgrade(fireball, 5);
+	AllUpgradesPool.push_back(su);
+
+	Spell* quickHeal = new Spell(SpellEffects::Heal, 5, true, false, true, 5, "Quick-Heal");
+	su = new ShopUpgrade(quickHeal, 5);
+	AllUpgradesPool.push_back(su);
+
+	Spell* meteor = new Spell(SpellEffects::DealDamage, 20, false, true, false, 7, "Meteor");
+	su = new ShopUpgrade(meteor, 10);
 	AllUpgradesPool.push_back(su);
 }
 

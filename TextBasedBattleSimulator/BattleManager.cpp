@@ -8,7 +8,7 @@ bool BattleManager::isPlayerTurn = true;
 vector<EnemyCharacter*> BattleManager::enemies;
 PlayerCharacter* BattleManager::player;
 
-void BattleManager::StartWave(PlayerCharacter* _player)
+void BattleManager::StartBattle(PlayerCharacter* _player)
 {
 	//check curLevel and set up accordingly
 	LevelManager::SetUpLevel(GameManager::GetCurLevel());
@@ -18,20 +18,21 @@ void BattleManager::StartWave(PlayerCharacter* _player)
 	player = _player;
 	
 	//print enemy data
-	cout << "Enemies: " << endl;
+	cout << "==========Battle Start==========" << endl;
+	cout << "Enemies: ";
 	for (size_t i = 0; i < enemies.size(); i++)
 	{
 		cout << enemies[i]->GetName() << endl;
 	}
 
 	//start battle
-	GameManager::SetGameState(GameManager::Battle);
-	MenuManager::BattleActionMenu();
-	TryEndWave();
-
+	while (GameManager::GetGameState() == GameManager::Battle)
+	{
+		StartTurn(isPlayerTurn);
+	}
 }
 
-void BattleManager::TryEndWave()
+void BattleManager::TryEndBattle()
 {
 	if (enemies.size() == 0)
 	{
@@ -41,9 +42,8 @@ void BattleManager::TryEndWave()
 			return;
 		}
 
-		cout << "==========Wave ended==========" << endl;
+		cout << "==========End of Battle==========" << endl;
 		GameManager::SetGameState(GameManager::Shop);
-		MenuManager::ShopMenu();
 	}
 }
 
@@ -58,11 +58,11 @@ void BattleManager::StartTurn(bool isPlayer)
 	cout << "==========" << (isPlayerTurn ? "Player's" : "Enemies'") << " turn" << "==========" << endl;
 
 
-	if (isPlayer)
+	if (isPlayer)//player's turn
 	{
 		MenuManager::BattleActionMenu();
 	}
-	else
+	else//enemies' turn
 	{
 		for (unsigned int i = 0; i < enemies.size(); i++)
 		{
@@ -103,7 +103,6 @@ void BattleManager::EndTurn(bool isPlayer)
 	if (isPlayerTurn == isPlayer)
 	{
 		isPlayerTurn = !isPlayerTurn;
-		StartTurn(isPlayerTurn);
 	}
 	else
 	{

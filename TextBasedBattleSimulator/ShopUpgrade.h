@@ -7,9 +7,9 @@ class ShopUpgrade :public IHasName
 {
 public:
 
-	ShopUpgrade(string _name,StatType type, int _amount, unsigned int _cost);
-	ShopUpgrade(Spell* _spell, unsigned int _cost);
-	unsigned int GetCost() { return cost; };
+	ShopUpgrade(string _name, StatType _statType, int _amount, int _cost);
+	ShopUpgrade(Spell* _spell, int _cost);
+	int GetCost() { return cost; };
 	Spell* GetSpell() { return spell; };
 	StatType GetStatType() { return statType; };
 	unsigned int GetAmount() { return amount; };
@@ -20,5 +20,5 @@ private:
 	unsigned int amount;
 	Spell* spell;
 	void(*Effect)(ShopUpgrade* su);
-	unsigned int cost;
+	int cost;
 };

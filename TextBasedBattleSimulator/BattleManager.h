@@ -9,8 +9,8 @@ class BattleManager
 {
 public:
 
-	static void StartWave(PlayerCharacter* _player);
-	static void TryEndWave();
+	static void StartBattle(PlayerCharacter* _player);
+	static void TryEndBattle();
 	static void StartTurn(bool isPlayer);
 	static vector<EnemyCharacter*> GetEnemies() { return enemies; };
 	static PlayerCharacter* GetPlayer() { return player; };

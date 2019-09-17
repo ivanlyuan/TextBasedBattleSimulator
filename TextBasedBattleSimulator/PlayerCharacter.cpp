@@ -6,14 +6,18 @@ PlayerCharacter::PlayerCharacter()
 {
 	maxHP = 20;
 	curHP = 20;
+	maxMP = 10;
+	curMP = 10;
 	atk = 5;
-	name = "playerName";
+	name = "Player";
 }
 
 PlayerCharacter::PlayerCharacter(string _name)
 {
 	maxHP = 20;
 	curHP = 20;
+	maxMP = 10;
+	curMP = 10;
 	atk = 5;
 	name = _name;
 }
@@ -26,7 +30,6 @@ PlayerCharacter::~PlayerCharacter()
 void PlayerCharacter::Attack(IDamageable* target)
 {
 	Character::Attack(target);
-	BattleManager::EndTurn(true);
 }
 
 void PlayerCharacter::ObtainGold(int amount)
@@ -37,23 +40,27 @@ void PlayerCharacter::ObtainGold(int amount)
 
 void PlayerCharacter::ApplyUpgrade(ShopUpgrade * su)
 {
-	cout << "Applied upgrade " << endl;
 
+	unsigned int amount = su->GetAmount();
 	switch (su->GetStatType())
 	{
-	case StatType::atk:
-		Character::atk += su->GetAmount();
-		break;
 	case StatType::hp:
-		Character::maxHP += su->GetAmount();
-		Character::curHP += su->GetAmount();
+		Character::maxHP += amount;
+		Character::curHP += amount;
+		cout << "max HP increaced by " << amount << endl;
 		break;
 	case StatType::mp:
-		Character::maxMP += su->GetAmount();
-		Character::curMP += su->GetAmount();
+		Character::maxMP += amount;
+		Character::curMP += amount;
+		cout << "max MP increaced by " << amount << endl;
 		break;
 	case StatType::spellSlot:
-		Character::spellSlots += su->GetAmount();
+		Character::spellSlots += amount;
+		cout << "gained " << amount << " spell slots" << endl;
+		break;
+	case StatType::atk:
+		Character::atk += amount;
+		cout << "atk increaced by " << amount << endl;
 		break;
 	default:
 		cout << "Invalid stat type" << endl;
@@ -65,6 +72,6 @@ void PlayerCharacter::OnDeath()
 {
 	IDamageable::OnDeath();
 	delete this;
-	GameManager::EndGame();
+	GameManager::SetGameState(GameManager::GameState::MainMenu);
 }
 

@@ -20,7 +20,7 @@ GameManager::GameManager()
 
 void GameManager::StartGame()
 {
-	//cout << "GameManager.StartGame()" << endl;
+	cout << "==========Game Start==========" << endl;
 	curLevel = 0;
 	if (!LevelManager::Init())
 	{
@@ -28,12 +28,27 @@ void GameManager::StartGame()
 	}
 	PlayerCharacter* p = new PlayerCharacter();
 	Shop::InitUpgrades();
-	BattleManager::StartWave(p);
+	SetGameState(GameState::Battle);
+
+	while (gameState != GameState::MainMenu)//game loop
+	{
+		if (gameState == GameState::Battle)
+		{
+			BattleManager::StartBattle(p);
+		}
+		
+		if (gameState == GameState::Shop)
+		{
+			MenuManager::ShopMenu();
+		}
+
+	}
+
 }
 
 void GameManager::EndGame()
 {
-	//cout << "GameManager.EndGame()" << endl;
+	cout << "=====Game Over=====" << endl;
 	MenuManager::MainMenu();
 }
 

@@ -10,7 +10,12 @@ using std::cin;
 
 int main()
 {
-	MenuManager::MainMenu();
+	GameManager::SetGameState(GameManager::GameState::MainMenu);
+
+	while (true)
+	{
+		MenuManager::MainMenu();
+	}
 	return 0;
 
 }

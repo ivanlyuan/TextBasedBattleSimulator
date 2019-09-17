@@ -146,6 +146,7 @@
     <ClInclude Include="IHasName.h" />
     <ClInclude Include="PlayerCharacter.h" />
     <ClInclude Include="SpellEffects.h" />
+    <ClInclude Include="StatusEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="levels.txt" />
