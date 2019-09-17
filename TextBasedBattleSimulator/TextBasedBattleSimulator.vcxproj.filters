@@ -112,5 +112,8 @@
     <Text Include="levels.txt">
       <Filter>資源檔</Filter>
     </Text>
+    <Text Include="readme.txt">
+      <Filter>資源檔</Filter>
+    </Text>
   </ItemGroup>
 </Project>

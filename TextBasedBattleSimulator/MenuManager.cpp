@@ -92,6 +92,9 @@ void MenuManager::BattleActionMenu()
 	mo = new MenuOption("Check Battlefield", CheckBattlefield);
 	mos.push_back(mo);
 
+	mo = new MenuOption("Check Player Stats", CheckPlayerStats);
+	mos.push_back(mo);
+
 	ShowMenu();
 }
 
@@ -215,7 +218,7 @@ void MenuManager::CheckPlayerStats(MenuOption * mo)
 	cout << "MP: " << p->GetCurMP() << "/" << p->GetMaxMP() << endl;
 	cout << "Atk: " << p->GetAtk() << endl;
 	cout << "Gold: " << p->GetGold() << endl;
-	cout << "Spell slots: " << p->GetSpellSlots() << endl;
+	//cout << "Spell slots: " << p->GetSpellSlots() << endl;
 	cout << "Spells: " << endl;
 
 	for (size_t i = 0; i < p->GetSpells().size(); i++)
