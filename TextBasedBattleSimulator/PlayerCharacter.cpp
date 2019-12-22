@@ -23,9 +23,9 @@ PlayerCharacter::~PlayerCharacter()
 	cout << name << " destroyed!" << endl;
 }
 
-void PlayerCharacter::Attack(IDamageable* target)
+bool PlayerCharacter::Attack(IDamageable* target)
 {
-	Character::Attack(target);
+	return Character::Attack(target);
 }
 
 void PlayerCharacter::ObtainGold(int amount)

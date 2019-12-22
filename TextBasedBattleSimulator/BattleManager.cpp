@@ -30,6 +30,7 @@ void BattleManager::StartBattle(PlayerCharacter* _player)
 	while (GameManager::GetGameState() == GameManager::Battle)
 	{
 		StartTurn(isPlayerTurn);
+		EndTurn(isPlayerTurn);
 	}
 }
 
@@ -59,13 +60,21 @@ void BattleManager::StartTurn(bool isPlayer)
 	cout << endl;
 	cout << "==========" << (isPlayerTurn ? "Player's" : "Enemies'") << " turn" << "==========" << endl;
 
-
 	if (isPlayer)//player's turn
 	{
-		MenuManager::BattleActionMenu();
+		player->SetHasAttacked(false);
+		while (!player->GetHasAttacked())
+		{
+			MenuManager::BattleActionMenu();
+		}
 	}
 	else//enemies' turn
 	{
+		for (unsigned int i = 0; i < enemies.size(); i++)
+		{
+			enemies[i]->SetHasAttacked(false);
+		}
+
 		for (unsigned int i = 0; i < enemies.size(); i++)
 		{
 			//enemies pick random actions
@@ -80,7 +89,6 @@ void BattleManager::StartTurn(bool isPlayer)
 	}
 
 
-	EndTurn(isPlayer);
 }
 
 void BattleManager::RemoveEnemy(EnemyCharacter* enemy)

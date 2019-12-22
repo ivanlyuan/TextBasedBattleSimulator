@@ -20,7 +20,6 @@ void MenuManager::BuyUpgrade(MenuOption * mo)
 		mo->upgrade->ApplyEffect();
 
 	}
-	ShopMenu();
 }
 
 void MenuManager::ShowMenu()
@@ -228,8 +227,6 @@ void MenuManager::CheckPlayerStats(MenuOption * mo)
 			cout << p->GetSpells()[i]->GetName() << endl;
 		}
 	}
-
-	ShopMenu();
 }
 
 

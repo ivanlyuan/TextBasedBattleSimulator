@@ -18,16 +18,19 @@ Character::~Character()
 }
 
 
-void Character::Attack(IDamageable* target)
+bool Character::Attack(IDamageable* target)
 {
 	if (target != NULL)
 	{
 		//cout << name << " attacked " << target->GetName() << endl;
 		target->TakeDamage(atk);
+		hasAttacked = true;
+		return true;
 	}
 	else
 	{
 		cout << "Attack failed: target not found" << endl;
+		return false;
 	}
 
 }
@@ -43,6 +46,7 @@ bool Character::CastSpell(Spell *s)
 	curMP -= s->GetManaCost();
 	cout << name << " casted " << s->GetName() << endl;
 	s->ApplyEffect();
+	hasAttacked = true;
 	return true;
 }
 
@@ -57,6 +61,7 @@ bool Character::CastSpell(Spell *s, IDamageable* target)
 	curMP -= s->GetManaCost();
 	cout << name << " casted " << s->GetName() << " on " << target->GetName() << endl;
 	s->ApplyEffect(target);
+	hasAttacked = true;
 	return true;
 }
 

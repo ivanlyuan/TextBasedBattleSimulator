@@ -14,7 +14,7 @@ public:
 	PlayerCharacter();
 	PlayerCharacter(string _name);
 	~PlayerCharacter();
-	void Attack(IDamageable* target)override;
+	bool Attack(IDamageable* target)override;
 	void ObtainGold(int amount);
 	void ApplyUpgrade(ShopUpgrade* su);
 	void AddSpell(Spell* spell) { cout << "Added spell: " << spell->GetName() << endl; spells.push_back(spell); };
