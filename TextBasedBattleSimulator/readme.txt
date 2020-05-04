@@ -2,11 +2,12 @@
 Spell Effects:
 
 	(quick): casting this spell does not end your turn
-
+	
+	NAME				EFFECT							COST
 	Fireball			Deal 10 damage to an enemy target			7mp
 	Meteor				Deal 20 damage to an enemy target			20mp
-	Joker's neutral b	(quick) Deal 2 damage to an enemy target 	5mp
-	Quick-Heal			(quick) Heal an ally target for 7 hp 		10mp
+	Joker's neutral b	(quick) Deal 2 damage to an enemy target 			5mp
+	Quick-Heal			(quick) Heal an ally target for 7 hp 			10mp
 
 =============================================================================================
 
